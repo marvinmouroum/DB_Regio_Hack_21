@@ -20,16 +20,20 @@ def get_total_data(event_name):
 
     arr_m = arr-mean
     arr_m_s = arr_m/std
-    return arr_m_s
+    return arr_m_s, mean, std
 
 #t = get_total_data('DECEL')
 #print(t)
 
-def plot_3D(X,pred_y):
-    ax = plt.axes(projection='3d')
+def plot_3D(X,pred_y, ax=None):
+    if ax is None:
+        ax = plt.axes(projection='3d')
     ax.scatter(X[:, 0], X[:, 1], X[:, 2], c=pred_y, cmap='viridis', linewidth=0.5);
 
     plt.show()
+
+    return ax
+
 
 #  Unique events 
 # ['ECO LEERLAUFZEITÜBERSCHREITUNG' 'TÜRE 2 GEÖFFNET' 'LEERLAUFZEIT 5M'
