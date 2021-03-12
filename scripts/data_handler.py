@@ -2,15 +2,21 @@ import pandas as pd
 import numpy as np
 from mpl_toolkits import mplot3d
 import matplotlib.pyplot as plt
+from scipy import stats 
 
 def get_total_data(event_name):
     df = pd.read_csv('../data/Telematik_Events.csv', sep=';')
     fata_exception =  df['type']==event_name
     filtered = df[fata_exception]
     # unique_events = df['type'].unique()
+    
     data = filtered[['lat','lon','dur']].dropna()
+    data['z_score']=stats.zscore(data['lat'])
+    clean = data.loc[data['z_score'].abs()<=3]
 
-    arr = data.values
+    # data[(np.abs(stats.zscore(df)) < 3).all(axis=1)]
+
+    arr = clean.values
 
     if arr.size == 0:
         return []
