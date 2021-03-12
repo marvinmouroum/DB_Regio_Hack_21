@@ -2,7 +2,7 @@ from sklearn.cluster import DBSCAN
 import scripts.data_handler as data
 import matplotlib.pyplot as plt
 
-X = data.get_total_data()[0:1000]
+X = data.get_total_data('DECEL')[0:1000]
 
 plt.figure(figsize=(10,6))
 
