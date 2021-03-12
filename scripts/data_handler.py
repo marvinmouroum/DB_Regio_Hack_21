@@ -9,4 +9,6 @@ def get_total_data():
     lon = df['lon']
     dur = df['dur']
 
-    print(event_type)
+    return df[['lat','lon','dur']].values
+
+#get_total_data()
