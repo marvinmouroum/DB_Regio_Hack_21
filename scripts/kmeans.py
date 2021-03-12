@@ -35,6 +35,6 @@ pred_y = kmeans.fit_predict(X)
 #plt.show()
 
 ax = plt.axes(projection='3d')
-ax.scatter(X[:,a1], X[:,a2], X[:,a3], c=X[:,a3], cmap='viridis', linewidth=0.5);
+ax.scatter(X[:,a1], X[:,a2], X[:,a3], c=pred_y, cmap='viridis', linewidth=0.5);
 ax.scatter(kmeans.cluster_centers_[:, a1], kmeans.cluster_centers_[:, a2], kmeans.cluster_centers_[:, a3], s=300, c='red')
 plt.show()
