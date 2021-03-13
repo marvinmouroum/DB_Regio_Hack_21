@@ -2,7 +2,7 @@ from sklearn.cluster import DBSCAN
 import scripts.data_handler as data
 import matplotlib.pyplot as plt
 import numpy as np
-import map_gen as mapper
+import scripts.map_gen as mapper
 
 x0 = data.get_total_data('DECEL_020G_15KMH_30KMH')
 x1 = data.get_total_data('DECEL_018G_30KMH_45KMH')
@@ -33,12 +33,15 @@ dangerous = y_pred == -1
 
 x = X[dangerous]
 
+trip_info = data.get_bounding_data()
+vin = trip_info[:,0]
+bounding_box = [(trip_info[:,1],trip_info[:,3],(trip_info[:,2],trip_info[:,4]))]
+
 plt.figure(figsize=(10,6))
 plt.scatter(x[:,0], x[:,1], cmap='Paired')
 plt.title("Dangerous locations")
 plt.show()
 
-print(x)
 
 ax = data.plot_3D(X,y_pred)
 
@@ -51,6 +54,9 @@ def inBox(box,point):
 
     return False
 
-mapper.gen_heat_map(X,"dbscan")
+for point in x:
+    if inBox(X,point):
+        mapper.gen_heat_map(X,"dbscan")
+
 
 
