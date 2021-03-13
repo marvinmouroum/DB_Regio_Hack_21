@@ -9,8 +9,6 @@ x2 = data.get_total_data('DECEL_016G_45KMH_60KMH')
 x3 = data.get_total_data('DECEL_014G_60KMH_75KMH')
 x4 = data.get_total_data('DECEL_012G_75KMH')
 
-#x0 = np.expand_dims(x0, axis=0)
-#x1 = np.expand_dims(x1, axis=0)
 x_sum = np.concatenate((x0, x1), axis=0)
 x_sum = np.concatenate((x_sum, x2), axis=0)
 x_sum = np.concatenate((x_sum, x3), axis=0)
@@ -42,4 +40,13 @@ plt.show()
 print(x)
 
 ax = data.plot_3D(X,y_pred)
+
+#boundingBox = [(lat,lon),(lat,lon)]
+
+def inBox(box,point):
+    if point[0] >= box[0][0] and point[1] >= box[0][1]:
+        if point[1] <= box[1][0] and point[1] <= box[1][1]:
+            return True
+
+    return False
 
