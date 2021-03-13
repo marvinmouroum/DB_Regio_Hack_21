@@ -1,7 +1,8 @@
 from sklearn.cluster import DBSCAN
-import scripts.data_handler as data
+import data_handler as data
 import matplotlib.pyplot as plt
 import numpy as np
+import map_gen as mapper
 
 x0 = data.get_total_data('DECEL_020G_15KMH_30KMH')
 x1 = data.get_total_data('DECEL_018G_30KMH_45KMH')
@@ -42,4 +43,6 @@ plt.show()
 print(x)
 
 ax = data.plot_3D(X,y_pred)
+
+mapper.gen_heat_map(x,"dbscan")
 
