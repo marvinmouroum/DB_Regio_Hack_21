@@ -18,8 +18,11 @@ def get_total_data(event_name):
 
     # data[(np.abs(stats.zscore(df)) < 3).all(axis=1)]
 
-    arr = clean.values
+    return clean.values
 
+
+
+def zero_mean(arr):
     if arr.size == 0:
         return []
 
@@ -29,6 +32,7 @@ def get_total_data(event_name):
     arr_m = arr-mean
     arr_m_s = arr_m/std
     return arr_m_s, mean, std
+
 
 #t = get_total_data('DECEL')
 #print(t)
