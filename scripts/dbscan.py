@@ -2,6 +2,7 @@ from sklearn.cluster import DBSCAN
 import scripts.data_handler as data
 import matplotlib.pyplot as plt
 import numpy as np
+import map_gen as mapper
 
 x0 = data.get_total_data('DECEL_020G_15KMH_30KMH')
 x1 = data.get_total_data('DECEL_018G_30KMH_45KMH')
@@ -49,4 +50,7 @@ def inBox(box,point):
             return True
 
     return False
+
+mapper.gen_heat_map(X,"dbscan")
+
 

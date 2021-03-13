@@ -5,7 +5,9 @@ from sklearn.cluster import KMeans
 
 from mpl_toolkits import mplot3d
 
-import scripts.data_handler as data
+import data_handler as data
+import map_gen as mapper
+
 
 def find_optimal_number_of_clusters():
     wcss = []

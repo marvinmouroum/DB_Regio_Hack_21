@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 from scipy import stats 
 
 def get_total_data(event_name):
-    df = pd.read_csv('../data/Telematik_Events.csv', sep=';')
+    df = pd.read_csv('./Telematik_Events.csv', sep=';')
     fata_exception =  df['type']==event_name
     filtered = df[fata_exception]
     # unique_events = df['type'].unique()
