@@ -2,9 +2,9 @@ from sklearn.cluster import DBSCAN
 import scripts.data_handler as data
 import matplotlib.pyplot as plt
 
-X, mean, std = data.get_total_data('DECEL_020G_15KMH_30KMH')
+X, mean, std = data.get_total_data('DECEL_016G_45KMH_60KMH')
 
-db = DBSCAN(eps=0.8, min_samples=5)
+db = DBSCAN(eps=0.5, min_samples=5)
 db.fit(X)
 
 y_pred = db.fit_predict(X)
