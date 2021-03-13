@@ -35,7 +35,7 @@ x = X[dangerous]
 
 trip_info = data.get_bounding_data()
 vin = trip_info[:,0]
-bounding_box = [(trip_info[:,1],trip_info[:,3],(trip_info[:,2],trip_info[:,4]))]
+bounding_boxes = [(trip_info[:,1],trip_info[:,3],(trip_info[:,2],trip_info[:,4]))]
 
 plt.figure(figsize=(10,6))
 plt.scatter(x[:,0], x[:,1], cmap='Paired')
@@ -43,8 +43,8 @@ plt.title("Dangerous locations")
 plt.show()
 
 
-ax = data.plot_3D(X,y_pred)
-
+#ax = data.plot_3D(x,y_pred)
+ax = data.plot_3D_simple(x)
 #boundingBox = [(lat,lon),(lat,lon)]
 
 def inBox(box,point):
@@ -54,9 +54,25 @@ def inBox(box,point):
 
     return False
 
-for point in x:
-    if inBox(X,point):
-        mapper.gen_heat_map(X,"dbscan")
+
+print("number of bounding boxes => ", len(trip_info))
+
+for info in trip_info:
+    point_list = []
+
+    box = [(info[1],info[3]),(info[2],info[4])]
+    counter = 0
+    print("\nlooping through " + str(x.shape[0]) + " points")
+    for point in x:
+        if inBox(box,point):
+            counter += 1
+            print("appened a point ratio ", counter/x.shape[0])
+            point_list.append(point)
+
+    if len(point_list) > 5:
+        x_new = np.array(point_list)
+        mapper.gen_heat_map(x_new, "dbscan")
+        break
 
 
 

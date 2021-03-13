@@ -30,7 +30,7 @@ def get_bounding_data():
     # filtered = df[fata_exception]
     # unique_events = df['type'].unique()
     
-    data = df[['vin','lat_min','lat_max','lon_min','lon_min']].dropna()
+    data = df[['vin','lat_min','lat_max','lon_min','lon_max']].dropna()
     
     
     return data.values
@@ -64,6 +64,13 @@ def plot_3D(X,pred_y, ax=None):
 
     return ax
 
+def plot_3D_simple(X):
+    ax = plt.axes(projection='3d')
+    ax.scatter(X[:, 0], X[:, 1], X[:, 2], cmap='viridis', linewidth=0.5);
+
+    plt.show()
+
+    return ax
 
 #  Unique events 
 # ['ECO LEERLAUFZEITÜBERSCHREITUNG' 'TÜRE 2 GEÖFFNET' 'LEERLAUFZEIT 5M'
