@@ -44,5 +44,5 @@ print(x)
 
 ax = data.plot_3D(X,y_pred)
 
-mapper.gen_heat_map(x,"dbscan")
+mapper.gen_heat_map(X,"dbscan")
 
