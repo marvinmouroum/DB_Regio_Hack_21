@@ -10,8 +10,7 @@ x2 = data.get_total_data('DECEL_016G_45KMH_60KMH')
 x3 = data.get_total_data('DECEL_014G_60KMH_75KMH')
 x4 = data.get_total_data('DECEL_012G_75KMH')
 
-#x0 = np.expand_dims(x0, axis=0)
-#x1 = np.expand_dims(x1, axis=0)
+
 x_sum = np.concatenate((x0, x1), axis=0)
 x_sum = np.concatenate((x_sum, x2), axis=0)
 x_sum = np.concatenate((x_sum, x3), axis=0)
@@ -35,14 +34,17 @@ dangerous = y_pred == -1
 
 x = X[dangerous]
 
+trip_info = data.get_bounding_data()
+vin = trip_info[:,0]
+bounding_box = [(trip_info[:,1],trip_info[:,3],(trip_info[:,2],trip_info[:,4]))]
+
 plt.figure(figsize=(10,6))
 plt.scatter(x[:,0], x[:,1], cmap='Paired')
 plt.title("Dangerous locations")
 plt.show()
 
-print(x)
 
 ax = data.plot_3D(X,y_pred)
 
-mapper.gen_heat_map(X,"dbscan")
+# mapper.gen_heat_map(X,"dbscan")
 

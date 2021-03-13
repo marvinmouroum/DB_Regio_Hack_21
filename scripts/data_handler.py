@@ -5,7 +5,8 @@ import matplotlib.pyplot as plt
 from scipy import stats 
 
 def get_total_data(event_name):
-    df = pd.read_csv('./Telematik_Events.csv', sep=';')
+    df = pd.read_csv('../data/Telematik_Events.csv', sep=';')
+
     fata_exception =  df['type']==event_name
     filtered = df[fata_exception]
     # unique_events = df['type'].unique()
@@ -14,13 +15,30 @@ def get_total_data(event_name):
     data['z_score']=stats.zscore(data['lat'])
     clean = data.loc[data['z_score'].abs()<=3]
     clean = clean[['lat','lon','dur']]
-    print(clean.shape)
+    # print(clean.shape)
 
     # data[(np.abs(stats.zscore(df)) < 3).all(axis=1)]
 
     return clean.values
 
 
+
+def get_bounding_data():
+    df = pd.read_csv('../data/Telematik_Trips.csv', sep=';')
+
+    # fata_exception =  df['type']==event_name
+    # filtered = df[fata_exception]
+    # unique_events = df['type'].unique()
+    
+    data = df[['vin','lat_min','lat_max','lon_min','lon_min']].dropna()
+    
+    
+    return data.values
+
+
+
+d = get_bounding_data()
+print(d)
 
 def zero_mean(arr):
     if arr.size == 0:
